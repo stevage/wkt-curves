@@ -1,0 +1,13 @@
+{
+  "name": "wkt-curves",
+  "version": "0.0.1",
+  "main": "index.js",
+  "private": true,
+  "devDependencies": {
+    "jest": "^27.1.0"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+  }
+}
