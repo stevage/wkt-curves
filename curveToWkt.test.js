@@ -14,7 +14,7 @@ test('curve', () => {
         ])
     ).toEqual('compoundcurve(circularstring(5.5 0, 6 -1, 6 -2), (6 -2, 3 4))');
 });
-test.only('curve', () => {
+test('curve', () => {
     expect(
         curveToWkt([
             'curvepolygon',

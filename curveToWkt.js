@@ -43,7 +43,3 @@ function compoundCurveToHtmlWkt([type, ...rest]) {
         return `${type.toUpperCase()}${coordsToWkt(rest)}`;
     }
 }
-
-// export function curveWktToGeoJSON(s) {
-//     return compoundCurveToGeoJSON(parseWkt(s));
-// }

@@ -1,22 +1,36 @@
-// given the location of three points on a circle and its center, gives angles clockwise from positive X axis (east)
-function findAngles(a, b, c, center) {
-    const start = -Math.atan2(a.y - center.y, a.x - center.x);
-    const mid = -Math.atan2(b.y - center.y, b.x - center.x);
-    const end = -Math.atan2(c.y - center.y, c.x - center.x);
+/*
+Giving an array of three [x, y] points, computes the unique arc that passes through.
 
-    const clockwise =
-        (start < mid && mid < end) ||
-        (end < start && start < mid) ||
-        (mid < end && end < start);
-    return {
-        start,
-        mid,
-        end,
-        anticlockwise: !clockwise,
-    };
+return {
+    center: { x, y },
+    radius,
+    start, // angle in degrees, clockwise from positive X axis (east)
+    mid,
+    end,
+    anticlockwise, // boolean
+
 }
-
+Adapted from: https://www.geeksforgeeks.org/equation-of-circle-when-three-points-on-the-circle-are-given/
+*/
 export function arcFromPoints(points) {
+    // given the location of three points on a circle and its center, gives angles clockwise from positive X axis (east)
+    function findAngles(a, b, c, center) {
+        const start = -Math.atan2(a.y - center.y, a.x - center.x);
+        const mid = -Math.atan2(b.y - center.y, b.x - center.x);
+        const end = -Math.atan2(c.y - center.y, c.x - center.x);
+
+        const clockwise =
+            (start < mid && mid < end) ||
+            (end < start && start < mid) ||
+            (mid < end && end < start);
+        return {
+            start,
+            mid,
+            end,
+            anticlockwise: !clockwise,
+        };
+    }
+
     const toXY = ([x, y]) => ({ x, y });
 
     const [a, b, c] = points.map(toXY);
@@ -107,11 +121,34 @@ function arcToCoords({ x, y, radius, start, end, anticlockwise }, steps) {
     return coords;
 }
 
-export function arcPointsToCoords(arcPoints, { steps = 64 } = {}) {
+function arcPointsToCoords(arcPoints, { steps = 64 } = {}) {
     const arc = arcFromPoints(arcPoints);
-    const ret = arcToCoords(arc, steps);
-    return ret;
+    const coords = arcToCoords(arc, steps);
+
+    // force the first and last point to exactly match the input
+    // this avoids tiny gaps in UI
+    coords[0] = arcPoints[0];
+    coords[coords.length - 1] = arcPoints[arcPoints.length - 1];
+
+    return coords;
 }
+
+/*
+Returns a representation of each curve where the middle point of each arc is exactly on the midpoint. Mostly for displaying UI handles.
+*/
+export function regularizeMidpoints([type, ...rest]) {
+    if (type === 'curvepolygon') {
+        return [type, ...rest.map(regularizeMidpoints)];
+    } else if (type === 'compoundcurve') {
+        return [type, ...rest.map(regularizeMidpoints)];
+    } else if (type === 'circularstring') {
+        // magically simple: find the arc, then turn it back into 3 points
+        return [type, ...arcPointsToCoords(rest, { steps: 3 })];
+    } else {
+        return [type, ...rest];
+    }
+}
+/* Returns a linear approximation of a curve, as a possibly-nested array of coordinates, like the geometry of a GeoJSON object */
 export function curveToCoords([type, ...rest], options = { steps: 64 }) {
     if (type === 'curvepolygon') {
         return rest.map((x) => curveToCoords(x, options));
@@ -134,30 +171,7 @@ export function curveToCoords([type, ...rest], options = { steps: 64 }) {
     }
 }
 
-export function regularizeMidpoints([type, ...rest]) {
-    if (type === 'curvepolygon') {
-        return [type, ...rest.map(regularizeMidpoints)];
-    } else if (type === 'compoundcurve') {
-        return [type, ...rest.map(regularizeMidpoints)];
-    } else if (type === 'circularstring') {
-        // magically simple: find the arc, then turn it back into 3 points
-        return [type, ...arcPointsToCoords(rest, 3)];
-    } else {
-        return [type, ...rest];
-    }
-}
-
-export function compoundCurveToGeoJSON(curve) {
-    return;
-}
-
-export function curvePolygonToGeoJSON([type, ...curves]) {
-    return {
-        type: 'Polygon',
-        coordinates: curves.map(compoundCurveToCoords),
-    };
-}
-
+/* Returns a linear approximation of a curve, as a GeoJSON geometry object */
 export function curveToGeoJSON([type, ...rest], options) {
     if (type === 'curvepolygon') {
         return {
@@ -172,4 +186,4 @@ export function curveToGeoJSON([type, ...rest], options) {
     }
 }
 
-if (typeof module !== 'undefined') module.exports = {};
+// if (typeof module !== 'undefined') module.exports = {};
