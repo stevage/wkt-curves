@@ -7,9 +7,6 @@
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --coverage"
   },
-  "dependencies": {
-    "jest": "^29.7.0"
-  },
   "author": "Steve Bennett <me@stevebennett.me>",
   "repository": {
     "type": "git",
@@ -18,6 +15,8 @@
   "files": [
     "index.js",
     "src"
-
-  ]
+  ],
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }
