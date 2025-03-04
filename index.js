@@ -3,9 +3,9 @@ import {
     curveToCoords,
     regularizeMidpoints,
     curveToGeoJSON,
-} from './wktCurves';
-import wktToCurve from './wktToCurve';
-import curveToWkt from './curveToWkt';
+} from './src/wktCurves';
+import wktToCurve from './src/wktToCurve';
+import curveToWkt from './src/curveToWkt';
 
 export {
     arcFromPoints,

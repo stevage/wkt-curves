@@ -1,4 +1,4 @@
-import wktToCurve from './wktToCurve';
+import wktToCurve from '../src/wktToCurve';
 
 describe('Basic parsing', () => {
     test('circularstring', () => {
