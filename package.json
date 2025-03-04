@@ -13,6 +13,6 @@
   "author": "Steve Bennett <me@stevebennett.me>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stevage/wkt-curves.git"
+    "url": "git+https://github.com/stevage/wkt-curves.git"
   }
 }
