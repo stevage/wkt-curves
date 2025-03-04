@@ -1,7 +1,7 @@
 {
   "name": "wkt-curves",
   "description": "Parse WKT circular curves such as CIRCULARSTRING, COMPOUNDCURVE and CURVEPOLYGON, and convert to GeoJSON.",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "main": "index.js",
   "type": "module",
   "scripts": {

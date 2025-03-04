@@ -1,4 +1,4 @@
-import curveToWkt from '../src/curveToWkt';
+import curveToWkt from '../src/curveToWkt.js';
 
 test('circularstring', () => {
     expect(curveToWkt(['circularstring', [0, 0], [4, 4], [8, 2]])).toEqual(

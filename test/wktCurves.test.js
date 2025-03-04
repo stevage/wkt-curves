@@ -2,7 +2,7 @@ import {
     curveToCoords,
     curveToGeoJSON,
     regularizeMidpoints,
-} from '../src/wktCurves';
+} from '../src/wktCurves.js';
 
 const circularstring1 = ['circularstring', [5.5, 0], [6, -1], [6, -2]];
 

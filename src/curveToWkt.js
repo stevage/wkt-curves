@@ -1,4 +1,4 @@
-import { curveToGeoJSON } from './wktCurves';
+import { curveToGeoJSON } from './wktCurves.js';
 
 export default function curveToWkt([type, ...rest], options = {}) {
     if (options.format === 'html') {
