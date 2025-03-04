@@ -1,13 +1,18 @@
 {
   "name": "wkt-curves",
+  "description": "Parse WKT circular curves such as CIRCULARSTRING, COMPOUNDCURVE and CURVEPOLYGON, and convert to GeoJSON.",
   "version": "0.0.1",
   "main": "index.js",
-  "private": true,
-  "devDependencies": {
-    "jest": "^27.1.0"
-  },
   "type": "module",
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --coverage"
+  },
+  "dependencies": {
+    "jest": "^29.7.0"
+  },
+  "author": "Steve Bennett <me@stevebennett.me>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stevage/wkt-curves.git"
   }
 }
