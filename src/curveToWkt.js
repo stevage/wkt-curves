@@ -1,5 +1,12 @@
 import { curveToGeoJSON } from './wktCurves.js';
 
+/**
+ * Convert a curve object to a WKT string.
+ * @param {Array} curve - A curve object.
+ * @param {Object} options - Options for the conversion.
+ * @param {string} [options.case='lowercase'] - The case of the WKT output.
+ * @param {string} [options.format='wkt'] - The format of the output.
+ */
 export default function curveToWkt([type, ...rest], options = {}) {
     if (options.format === 'html') {
         return compoundCurveToHtmlWkt([type, ...rest]);

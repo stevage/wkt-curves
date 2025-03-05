@@ -12,6 +12,11 @@ return {
 }
 Adapted from: https://www.geeksforgeeks.org/equation-of-circle-when-three-points-on-the-circle-are-given/
 */
+/**
+ * Given an array of three [x, y] points, computes the unique arc that passes through.
+ * @param {Array} points - An array of three [x, y] points.
+ * @returns {Object} An object representing the arc: x, y, radius, start, mid, end, anticlockwise
+ */
 export function arcFromPoints(points) {
     // given the location of three points on a circle and its center, gives angles clockwise from positive X axis (east)
     function findAngles(a, b, c, center) {
@@ -133,9 +138,11 @@ function arcPointsToCoords(arcPoints, { steps = 64 } = {}) {
     return coords;
 }
 
-/*
-Returns a representation of each curve where the middle point of each arc is exactly on the midpoint. Mostly for displaying UI handles.
-*/
+/**
+ * Returns a representation of each curve where the middle point of each arc is exactly on the midpoint. Mostly for displaying UI handles.
+ * @param {Array} curve - A curve object.
+ * @returns {Array} A curve object with midpoints regularized.
+ */
 export function regularizeMidpoints([type, ...rest]) {
     if (type === 'curvepolygon') {
         return [type, ...rest.map(regularizeMidpoints)];
@@ -148,7 +155,13 @@ export function regularizeMidpoints([type, ...rest]) {
         return [type, ...rest];
     }
 }
-/* Returns a linear approximation of a curve, as a possibly-nested array of coordinates, like the geometry of a GeoJSON object */
+/**
+ * Returns a linear approximation of a curve, as a possibly-nested array of coordinates, like the geometry of a GeoJSON object
+ * @param {Array} curve - A curve object.
+ * @param {Object} options - Options for the conversion.
+ * @param {number} [options.steps=64] - The number of steps to use for approximating circular strings.
+ * @returns {Array} A possibly-nested array of coordinates.
+ */
 export function curveToCoords([type, ...rest], options = { steps: 64 }) {
     if (type === 'curvepolygon') {
         return rest.map((x) => curveToCoords(x, options));
@@ -171,7 +184,14 @@ export function curveToCoords([type, ...rest], options = { steps: 64 }) {
     }
 }
 
-/* Returns a linear approximation of a curve, as a GeoJSON geometry object */
+/**
+ * Returns a linear approximation of a curve, as a GeoJSON geometry object
+ * @param {Array} curve - A curve object.
+ * @param {Object} options - Options for the conversion.
+ * @param {number} [options.steps=64] - The number of steps to use for approximating circular strings.
+ * @returns {Object} A GeoJSON geometry object (LineString or Polygon)
+
+ * */
 export function curveToGeoJSON([type, ...rest], options) {
     if (type === 'curvepolygon') {
         return {

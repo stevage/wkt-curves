@@ -32,20 +32,23 @@ function normalizeCurve([type, ...rest]) {
     }
 }
 
-/*
-
-Parses a WKT (well-known string) to an object structure as required by the curves functions.
-Caveats:
-- no validation
-- focuses on handling possible outputs from PostGIS
-- inserts a fictional 'linestring' tag name within CompoundCurve etc
-- converts tag names to lowercase
-
-Output format: ['compoundcurve', ['circularstring', [0, 0], [1, 2], [2, 2]], ['linestring', [2,2], [2, 4]]
+/**
+ * Parses a WKT (well-known string) to an object structure as required by the curves functions.
+ * Caveats:
+ * - no validation
+ * - focuses on handling possible outputs from PostGIS
+ * - inserts a fictional 'linestring' tag name within CompoundCurve etc
+ * - converts tag names to lowercase
+ *
+ * @param {string} wktString - A WKT string.
+ * @param {Object} options - Options for the conversion.
+ * @param {boolean} [options.normalize=true] - Whether to normalize the curve.
+ * @returns {Array} A curve object.
+ * @example output : ['compoundcurve', ['circularstring', [0, 0], [1, 2], [2, 2]], ['linestring', [2,2], [2, 4]]
 
 */
 
-export default function parseWkt(wktString, options = { normalize: true }) {
+export default function wktToCurve(wktString, options = { normalize: true }) {
     const s = () => wktString.slice(pos);
     let pos = 0;
 
