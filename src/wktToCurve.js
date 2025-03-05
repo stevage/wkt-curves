@@ -42,9 +42,10 @@ function normalizeCurve([type, ...rest]) {
  *
  * @param {string} wktString - A WKT string.
  * @param {Object} options - Options for the conversion.
- * @param {boolean} [options.normalize=true] - Whether to normalize the curve.
+ * @param {boolean} [options.normalize=true] - Whether to normalize the curve. (If yes, the top level element is either compoundcurve or curvepolygon; every ring of a curvepolygon is a compoundcurve; every circularstring consists of exactly 3 points (by splitting those of more than 3 points))
+
  * @returns {Array} A curve object.
- * @example output : ['compoundcurve', ['circularstring', [0, 0], [1, 2], [2, 2]], ['linestring', [2,2], [2, 4]]
+ * @example ['compoundcurve', ['circularstring', [0, 0], [1, 2], [2, 2]], ['linestring', [2,2], [2, 4]]
 
 */
 

@@ -12,6 +12,8 @@ See the [PostGIS documentation](https://postgis.net/docs/manual-1.4/ch04.html) f
 
 This library does *not* support `MULTICURVE` or `MULTISURFACE`.
 
+API documentation: https://stevage.github.io/wkt-curves
+
 ## Usage
 
 ```js

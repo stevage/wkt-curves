@@ -770,7 +770,7 @@ Caveats:</p>
   
     (default <code>true</code>)
   </td>
-  <td class='break-word'><span>Whether to normalize the curve.
+  <td class='break-word'><span>Whether to normalize the curve. (If yes, the top level element is either compoundcurve or curvepolygon; every ring of a curvepolygon is a compoundcurve; every circularstring consists of exactly 3 points (by splitting those of more than 3 points))
 </span></td>
 </tr>
 
@@ -804,7 +804,7 @@ Caveats:</p>
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'>output : [<span class="hljs-string">&#x27;compoundcurve&#x27;</span>, [<span class="hljs-string">&#x27;circularstring&#x27;</span>, [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">2</span>]], [<span class="hljs-string">&#x27;linestring&#x27;</span>, [<span class="hljs-number">2</span>,<span class="hljs-number">2</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">4</span>]]</pre>
+      <pre class='p1 overflow-auto round fill-light'>[<span class="hljs-string">&#x27;compoundcurve&#x27;</span>, [<span class="hljs-string">&#x27;circularstring&#x27;</span>, [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">2</span>]], [<span class="hljs-string">&#x27;linestring&#x27;</span>, [<span class="hljs-number">2</span>,<span class="hljs-number">2</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">4</span>]]</pre>
     
   
 
